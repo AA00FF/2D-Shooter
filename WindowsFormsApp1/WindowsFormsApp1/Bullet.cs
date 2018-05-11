@@ -8,9 +8,17 @@ namespace WindowsFormsApp1
 {
     class Bullet
     {
-        public Bullet()
+        
+        public int Y { get; set; }
+        public int X { get; set; }
+        public bool Player { get; set; }
+        public Bullet( int y ,int x, bool player)
         {
-            Console.WriteLine("test2");
+            X = x;
+            Y = y;
+            Player = player;
         }
+        
+       
     }
 }

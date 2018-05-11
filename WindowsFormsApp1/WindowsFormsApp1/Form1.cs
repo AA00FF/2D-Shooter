@@ -18,5 +18,21 @@ namespace WindowsFormsApp1
         {
             InitializeComponent();
         }
+        public void shoot(object sender, KeyEventArgs e)
+        {
+            Bullet b = new Bullet(pictureBox_player.Location.X, pictureBox_player.Location.Y,true);
+            switch (e.KeyCode)
+            {
+                case Keys.Space:
+                    {
+                        for (int i = 0; i < 100&& b.X != INSERT.X && b.Y != INSERT.Y; i++)
+                        {
+                            b.X++;
+                        }
+                        break;
+                    }
+            }
+
+        }
     }
 }
