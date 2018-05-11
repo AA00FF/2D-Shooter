@@ -8,5 +8,9 @@ namespace WindowsFormsApp1
 {
     class Bullet
     {
+        public Bullet()
+        {
+            
+        }
     }
 }
