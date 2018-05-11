@@ -10,7 +10,7 @@ namespace WindowsFormsApp1
     {
         public Bullet()
         {
-            
+            sdfghzsdsvf
         }
     }
 }
