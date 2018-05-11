@@ -10,7 +10,7 @@ namespace WindowsFormsApp1
     {
         public Bullet()
         {
-            Console.WriteLine("test");
+            Console.WriteLine("test2");
         }
     }
 }
