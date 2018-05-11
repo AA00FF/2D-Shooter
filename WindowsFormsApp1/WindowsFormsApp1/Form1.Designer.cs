@@ -33,16 +33,16 @@
             // 
             // panel1
             // 
-            this.panel1.Location = new System.Drawing.Point(889, 13);
+            this.panel1.Location = new System.Drawing.Point(467, 12);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(200, 500);
+            this.panel1.Size = new System.Drawing.Size(1000, 500);
             this.panel1.TabIndex = 0;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1101, 589);
+            this.ClientSize = new System.Drawing.Size(1481, 532);
             this.Controls.Add(this.panel1);
             this.Name = "Form1";
             this.Text = "Form1";
