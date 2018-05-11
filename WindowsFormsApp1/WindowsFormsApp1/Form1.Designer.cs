@@ -28,9 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            this.components = new System.ComponentModel.Container();
             this.panel1 = new System.Windows.Forms.Panel();
             this.pictureBox_player = new System.Windows.Forms.PictureBox();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_player)).BeginInit();
             this.SuspendLayout();
@@ -47,7 +48,6 @@
             // 
             // pictureBox_player
             // 
-            this.pictureBox_player.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox_player.Image")));
             this.pictureBox_player.ImageLocation = "";
             this.pictureBox_player.Location = new System.Drawing.Point(0, 0);
             this.pictureBox_player.Margin = new System.Windows.Forms.Padding(0);
@@ -56,6 +56,11 @@
             this.pictureBox_player.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.pictureBox_player.TabIndex = 0;
             this.pictureBox_player.TabStop = false;
+            // 
+            // timer1
+            // 
+            this.timer1.Interval = 2000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // Form1
             // 
@@ -78,6 +83,7 @@
 
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.PictureBox pictureBox_player;
+        private System.Windows.Forms.Timer timer1;
     }
 }
 
