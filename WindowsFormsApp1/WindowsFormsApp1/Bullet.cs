@@ -10,7 +10,11 @@ namespace WindowsFormsApp1
     {
         public Bullet()
         {
+<<<<<<< HEAD
             sdfghzsdsvf
+=======
+            sdsfsd
+>>>>>>> 3945c36b2f32a27858c230fa633d9ae576c04a8e
         }
     }
 }
