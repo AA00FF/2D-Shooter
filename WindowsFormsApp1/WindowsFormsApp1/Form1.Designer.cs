@@ -39,18 +39,20 @@
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.panel1.Controls.Add(this.pictureBox_player);
-            this.panel1.Location = new System.Drawing.Point(467, 12);
+            this.panel1.Location = new System.Drawing.Point(260, 12);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1000, 500);
+            this.panel1.Size = new System.Drawing.Size(1540, 770);
             this.panel1.TabIndex = 0;
             // 
             // pictureBox_player
             // 
             this.pictureBox_player.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox_player.Image")));
-            this.pictureBox_player.ImageLocation = "Spaceship.png";
+            this.pictureBox_player.ImageLocation = "";
             this.pictureBox_player.Location = new System.Drawing.Point(0, 0);
+            this.pictureBox_player.Margin = new System.Windows.Forms.Padding(0);
             this.pictureBox_player.Name = "pictureBox_player";
             this.pictureBox_player.Size = new System.Drawing.Size(100, 100);
+            this.pictureBox_player.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.pictureBox_player.TabIndex = 0;
             this.pictureBox_player.TabStop = false;
             // 
@@ -58,11 +60,14 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1481, 532);
+            this.ClientSize = new System.Drawing.Size(1808, 793);
             this.Controls.Add(this.panel1);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_player)).EndInit();
             this.ResumeLayout(false);
 
