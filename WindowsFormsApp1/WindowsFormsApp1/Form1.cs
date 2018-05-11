@@ -13,7 +13,7 @@ namespace WindowsFormsApp1
     public partial class Form1 : Form
     {
         int x = 0, y = 0;
-        int[,] game = new int[10, 5];
+        public int[,] game { get; private set; } = new int[10, 5];
 
         public Form1()
         {
