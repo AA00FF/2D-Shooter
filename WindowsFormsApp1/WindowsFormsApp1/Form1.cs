@@ -12,6 +12,8 @@ namespace WindowsFormsApp1
 {
     public partial class Form1 : Form
     {
+        int[,,,] game = new int[5, 10, 2, 2];
+
         public Form1()
         {
             InitializeComponent();

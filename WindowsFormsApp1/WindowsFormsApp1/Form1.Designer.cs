@@ -28,15 +28,31 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.pictureBox_player = new System.Windows.Forms.PictureBox();
+            this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_player)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
             // 
+            this.panel1.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.panel1.Controls.Add(this.pictureBox_player);
             this.panel1.Location = new System.Drawing.Point(467, 12);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1000, 500);
             this.panel1.TabIndex = 0;
+            // 
+            // pictureBox_player
+            // 
+            this.pictureBox_player.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox_player.Image")));
+            this.pictureBox_player.ImageLocation = "Spaceship.png";
+            this.pictureBox_player.Location = new System.Drawing.Point(0, 0);
+            this.pictureBox_player.Name = "pictureBox_player";
+            this.pictureBox_player.Size = new System.Drawing.Size(100, 100);
+            this.pictureBox_player.TabIndex = 0;
+            this.pictureBox_player.TabStop = false;
             // 
             // Form1
             // 
@@ -46,6 +62,8 @@
             this.Controls.Add(this.panel1);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_player)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -53,6 +71,7 @@
         #endregion
 
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.PictureBox pictureBox_player;
     }
 }
 
