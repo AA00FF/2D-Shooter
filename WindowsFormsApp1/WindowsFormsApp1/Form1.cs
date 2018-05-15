@@ -12,7 +12,7 @@ namespace WindowsFormsApp1
 {
     public partial class Form1 : Form
     {
-        List<PictureBox> enemys = new List<PictureBox>();
+        List<Enemy> enemys = new List<Enemy>();
         int x = 0, y = 0;
         public int[,] position_player { get; private set; } = new int[10, 5];
 
@@ -96,40 +96,39 @@ namespace WindowsFormsApp1
         private void timer1_Tick(object sender, EventArgs e)
         {
             DeleteEnemy();
-            Enemy en = new Enemy();
+            
             for (int i = 0; i < enemys.Count; i++)
             {
-                enemys[i].Location = en.EnemyMove(enemys[i]);
+                enemys[i].EnemyMove();
             }
         }
 
         private void DeleteEnemy()
         {
-            List<PictureBox> removeenemy = new List<PictureBox>();
-            foreach (PictureBox p in enemys)
+            List<Enemy> removeenemy = new List<Enemy>();
+            foreach (Enemy e in enemys)
             {
-                if (p.Location.X == 0)
+                if(e.p.Location != null)
                 {
-                    removeenemy.Add(p);
+                    if (e.p.Location.X == 0)
+                    {
+                        removeenemy.Add(e);
+                    }
                 }
             }
 
-            foreach(PictureBox p in removeenemy)
+            foreach(Enemy e in removeenemy)
             {
-                enemys.Remove(p);
-                panel1.Controls.Remove(p);
+                enemys.Remove(e);
+                panel1.Controls.Remove(e.p);
             }
         }
 
         private void SpawnEnemy()
         {
-            PictureBox p = new PictureBox();
-            int ye = rnd.Next(0, 5) * 100;
-            p.Location = new Point(900, ye);
-            p.ImageLocation = AppDomain.CurrentDomain.BaseDirectory + "Enemy.png";
-            p.SizeMode = PictureBoxSizeMode.AutoSize;
-            enemys.Add(p);
-            panel1.Controls.Add(p);
+            Enemy e = new Enemy();
+            enemys.Add(e);
+            panel1.Controls.Add(e.p);
         }
 
 

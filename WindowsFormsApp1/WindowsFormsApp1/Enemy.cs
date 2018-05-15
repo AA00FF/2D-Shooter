@@ -12,25 +12,25 @@ namespace WindowsFormsApp1
     class Enemy
     {
         static Random rnd = new Random();
+        public PictureBox p { get; private set; } = new PictureBox();
+    
+        public Enemy()
+        {
+            int y = rnd.Next(0, 5) * 100;
+            this.p.Location = new Point(900, y);
+            this.p.ImageLocation = AppDomain.CurrentDomain.BaseDirectory + "Enemy.png";
+            this.p.SizeMode = PictureBoxSizeMode.AutoSize;
+        }
+
         int direction;
         int PickDirection { get { return direction = rnd.Next(0, 3); } }
 
-        public Point EnemyMove(PictureBox p)
+        public void EnemyMove()
         {
             if(direction == 0 && p.Location.X != 0)
             {
-                return new Point(p.Location.X - 100, p.Location.Y);
+                p.Location = new Point(p.Location.X - 100, p.Location.Y);
             }
-            if(direction == 1 && p.Location.Y != 400)
-            {
-                return new Point(p.Location.X, p.Location.Y + 100);
-            }
-            if(direction == 2 && p.Location.Y != 0)
-            {
-                return new Point(p.Location.X, p.Location.Y - 100);
-            }
-
-            return new Point();
         }
     }
 }
