@@ -13,6 +13,7 @@ namespace WindowsFormsApp1
     public partial class Form1 : Form
     {
         List<Enemy> enemys = new List<Enemy>();
+        List<Bullet> bullet = new List<Bullet>();
         int x = 0, y = 0;
         public int[,] position_player { get; private set; } = new int[10, 5];
 
@@ -79,6 +80,11 @@ namespace WindowsFormsApp1
                 case Keys.Space:
                     SpawnEnemy();
                     break;
+                case Keys.X:
+                    Bullet b = new Bullet(pictureBox_player.Location.X, pictureBox_player.Location.Y, true);
+                    bullet.Add(b);
+                    panel1.Controls.Add(b.p);
+                    break;
             }
         }
 
@@ -91,14 +97,22 @@ namespace WindowsFormsApp1
             position_player[0, 0] = 1;
             SpawnEnemy();
             timer1.Start();
+            timer2.Start();
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
             DeleteEnemy();
-            
+
             for (int i = 0; i < enemys.Count; i++)
             {
+                foreach (Bullet b in bullet)
+                {
+                    if (b.p.Location.X == enemys[i].p.Location.X && b.p.Location.Y == enemys[i].p.Location.Y)
+                    {
+                        DeleteEnemy();
+                    }
+                }
                 enemys[i].EnemyMove();
             }
         }
@@ -108,7 +122,7 @@ namespace WindowsFormsApp1
             List<Enemy> removeenemy = new List<Enemy>();
             foreach (Enemy e in enemys)
             {
-                if(e.p.Location != null)
+                if (e.p.Location != null)
                 {
                     if (e.p.Location.X == 0)
                     {
@@ -117,11 +131,45 @@ namespace WindowsFormsApp1
                 }
             }
 
-            foreach(Enemy e in removeenemy)
+            foreach (Enemy e in removeenemy)
             {
                 enemys.Remove(e);
                 panel1.Controls.Remove(e.p);
             }
+        }
+
+        private void pictureBox_player_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Timer2_Tick(object sender, EventArgs e)
+        {
+
+            foreach (Bullet b in bullet)
+            {
+                if (b.Player == true)
+                {
+
+                    b.p.Location = new Point(b.p.Location.X + 100, b.p.Location.Y);
+
+
+
+                    foreach (Enemy a in enemys)
+                    {
+
+
+                    }
+
+
+                }
+                else
+                {
+                    b.shoot(b.X, b.Y, b.p);
+                    b.X--;
+                }
+            }
+
         }
 
         private void SpawnEnemy()
