@@ -18,12 +18,15 @@ namespace WindowsFormsApp1
         public PictureBox p { get; private set; } = new PictureBox();
         public Bullet(int x , int y ,bool player)
         {
+
             X = x;
             Y = y;
+            p.Location = new Point(X, Y);
             this.p.ImageLocation = AppDomain.CurrentDomain.BaseDirectory + "bullet.png";
+            this.p.SizeMode = PictureBoxSizeMode.AutoSize;
             Player = player;
         }
-        public void shoot(int x, int y, PictureBox p)
+        public void shoot(int x, int y)
         {
             p.Location = new Point(x, y);
             

@@ -81,7 +81,7 @@ namespace WindowsFormsApp1
                     SpawnEnemy();
                     break;
                 case Keys.X:
-                    Bullet b = new Bullet(pictureBox_player.Location.X, pictureBox_player.Location.Y, true);
+                    Bullet b = new Bullet(pictureBox_player.Location.X,pictureBox_player.Location.Y, true);
                     bullet.Add(b);
                     panel1.Controls.Add(b.p);
                     break;
@@ -137,7 +137,62 @@ namespace WindowsFormsApp1
                 panel1.Controls.Remove(e.p);
             }
         }
+        private void hit()
+        {
+            List<Enemy> removeenemy = new List<Enemy>();
+            List<Bullet> removeb = new List<Bullet>();
+            foreach (Enemy e in enemys)
+            {
+                if (e.p.Location != null)
+                {
+                    foreach (Bullet b in bullet)
+                    {
+                        if (e.p.Location.X == b.p.Location.X && e.p.Location.Y == b.p.Location.Y)
+                        {
+                            removeb.Add(b);
+                            removeenemy.Add(e);
+                        }
+                    }
+                    
+                }
+                
+            }
 
+            foreach (Enemy e in removeenemy)
+            {
+                enemys.Remove(e);
+                panel1.Controls.Remove(e.p);
+            }
+            foreach(Bullet a in removeb)
+            {
+                bullet.Remove(a);
+                panel1.Controls.Remove(a.p);
+            }
+        }
+        private void DeleteBullet(Bullet c)
+        {
+            List<Bullet> removebullet = new List<Bullet>();
+            removebullet.Add(c);
+            foreach (Bullet b in bullet)
+            {
+                if (b.p.Location != null)
+                {
+                    if (b.p.Location.X == 900)
+                    {
+                        
+                        removebullet.Add(b);
+                    }
+                }
+            }
+            bullet.Remove(c);
+            panel1.Controls.Remove(c.p);
+            foreach (Bullet b in removebullet)
+            {
+                
+                bullet.Remove(b);
+                panel1.Controls.Remove(b.p);
+            }
+        }
         private void pictureBox_player_Click(object sender, EventArgs e)
         {
 
@@ -151,25 +206,16 @@ namespace WindowsFormsApp1
                 if (b.Player == true)
                 {
 
-                    b.p.Location = new Point(b.p.Location.X + 100, b.p.Location.Y);
-
-
-
-                    foreach (Enemy a in enemys)
-                    {
-
-
-                    }
-
-
+                    b.shoot(b.p.Location.X + 100, b.p.Location.Y);
+                    
                 }
                 else
                 {
-                    b.shoot(b.X, b.Y, b.p);
-                    b.X--;
+                    b.shoot(b.X-100, b.Y);
+                    
                 }
             }
-
+            hit();
         }
 
         private void SpawnEnemy()
