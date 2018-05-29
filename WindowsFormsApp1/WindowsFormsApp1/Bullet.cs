@@ -22,7 +22,15 @@ namespace WindowsFormsApp1
             X = x;
             Y = y;
             p.Location = new Point(X, Y);
-            this.p.ImageLocation = AppDomain.CurrentDomain.BaseDirectory + "bullet.png";
+            if(player == false)
+            {
+                this.p.ImageLocation = AppDomain.CurrentDomain.BaseDirectory + "ebullet.png";
+            }
+            else
+            {
+                this.p.ImageLocation = AppDomain.CurrentDomain.BaseDirectory + "bullet.png";
+            }
+            
             this.p.SizeMode = PictureBoxSizeMode.AutoSize;
             Player = player;
         }

@@ -99,7 +99,21 @@ namespace WindowsFormsApp1
             timer1.Start();
             timer2.Start();
         }
-
+        private void eshoot()
+        {
+            int z;
+            foreach(Enemy e in enemys)
+            {
+                z = rnd.Next(0,101);
+                if(z < 5)
+                {
+                    Bullet b = new Bullet(e.p.Location.X, e.p.Location.Y, false);
+                    bullet.Add(b);
+                    panel1.Controls.Add(b.p);
+                }
+                
+            }
+        }
         private void timer1_Tick(object sender, EventArgs e)
         {
             DeleteEnemy();
@@ -147,10 +161,15 @@ namespace WindowsFormsApp1
                 {
                     foreach (Bullet b in bullet)
                     {
-                        if (e.p.Location.X == b.p.Location.X && e.p.Location.Y == b.p.Location.Y)
+                        if (e.p.Location.X == b.p.Location.X && e.p.Location.Y == b.p.Location.Y && b.Player == true)
                         {
                             removeb.Add(b);
                             removeenemy.Add(e);
+                        }
+                        if(pictureBox_player.Location.X == b.p.Location.X && pictureBox_player.Location.Y == b.p.Location.Y && b.Player != true)
+                        {
+                            removeb.Add(b);
+                            // HP wird benötigt--------------------------------------------------------------------------------------------------------------------------------------------
                         }
                     }
                     
@@ -169,23 +188,23 @@ namespace WindowsFormsApp1
                 panel1.Controls.Remove(a.p);
             }
         }
-        private void DeleteBullet(Bullet c)
+        private void DeleteBullet()
         {
+
             List<Bullet> removebullet = new List<Bullet>();
-            removebullet.Add(c);
+            
             foreach (Bullet b in bullet)
             {
                 if (b.p.Location != null)
                 {
-                    if (b.p.Location.X == 900)
+                    if (b.p.Location.X > 900||b.p.Location.X<0)
                     {
                         
                         removebullet.Add(b);
                     }
                 }
             }
-            bullet.Remove(c);
-            panel1.Controls.Remove(c.p);
+            
             foreach (Bullet b in removebullet)
             {
                 
@@ -195,12 +214,14 @@ namespace WindowsFormsApp1
         }
         private void pictureBox_player_Click(object sender, EventArgs e)
         {
-
+            //pictureBox_player.ImageLocation = AppDomain.CurrentDomain.BaseDirectory + "pepe.jpg";
+            // vllt ein secret char
         }
 
         private void Timer2_Tick(object sender, EventArgs e)
         {
-
+            eshoot();
+            DeleteBullet();
             foreach (Bullet b in bullet)
             {
                 if (b.Player == true)
@@ -211,7 +232,7 @@ namespace WindowsFormsApp1
                 }
                 else
                 {
-                    b.shoot(b.X-100, b.Y);
+                    b.shoot(b.p.Location.X-100, b.p.Location.Y);
                     
                 }
             }
