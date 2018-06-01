@@ -13,7 +13,7 @@ namespace WindowsFormsApp1
     {
         static Random rnd = new Random();
         public PictureBox p { get; private set; } = new PictureBox();
-    
+
         public Enemy()
         {
             int y = rnd.Next(0, 5) * 100;
@@ -27,11 +27,11 @@ namespace WindowsFormsApp1
 
         public void EnemyMove()
         {
-            if(direction == 0 && p.Location.X != 0)
+            if (direction == 0 && p.Location.X != 0)
             {
                 p.Location = new Point(p.Location.X - 100, p.Location.Y);
                 //wenn position von p.Location == von Player dann bekommt player dmg und enemy wird deleted
-                
+
             }
         }
     }
