@@ -173,7 +173,7 @@ namespace WindowsFormsApp1
                         if (pictureBox_player.Location.X == b.p.Location.X && pictureBox_player.Location.Y == b.p.Location.Y && b.Player == false)
                         {
                             removeb.Add(b);
-                            panel1.Controls.Clear();
+                            
                         }
                     }
 
@@ -253,16 +253,15 @@ namespace WindowsFormsApp1
         {
 
         }
-        private int Wert { get; set; }
+
         private void SpawnEnemy()
         {
             Enemy e = new Enemy();
-            if (Wert <= 20)
-                Wert = 20;
+            int wert = 20;
             int time = rnd.Next(0, 500);
-            if(time < Wert)
+            if(time < wert)
             {
-                Wert+=2;
+                wert+=2;
                 enemys.Add(e);
                 panel1.Controls.Add(e.p);
             }
