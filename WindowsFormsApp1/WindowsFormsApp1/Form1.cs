@@ -88,17 +88,27 @@ namespace WindowsFormsApp1
             }
         }
 
-        static Random rnd = new Random();
-
-        private void Form1_Load(object sender, EventArgs e)
+        public void Init()
         {
-            label1.Text = "Points: 0";
             pictureBox_player.ImageLocation = AppDomain.CurrentDomain.BaseDirectory + "Spaceship.png";
             pictureBox_player.Location = new Point(0, 0);
             position_player[0, 0] = 1;
             SpawnEnemy();
             timer1.Start();
             timer2.Start();
+            timer3.Start();
+            for (int i = 0; i < 3; i++)
+            {
+                SpawnEnemy();
+            }
+        }
+
+        static Random rnd = new Random();
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            label1.Text = "Points: 0";
+
         }
         private void eshoot()
         {
@@ -118,7 +128,7 @@ namespace WindowsFormsApp1
         private void timer1_Tick(object sender, EventArgs e)
         {
             DeleteEnemy();
-            
+
             for (int i = 0; i < enemys.Count; i++)
             {
                 foreach (Bullet b in bullet)
@@ -173,7 +183,7 @@ namespace WindowsFormsApp1
                         if (pictureBox_player.Location.X == b.p.Location.X && pictureBox_player.Location.Y == b.p.Location.Y && b.Player == false)
                         {
                             removeb.Add(b);
-                            
+
                         }
                     }
 
@@ -226,7 +236,6 @@ namespace WindowsFormsApp1
         {
             eshoot();
             DeleteBullet();
-            SpawnEnemy();
             foreach (Bullet b in bullet)
             {
                 if (b.Player == true)
@@ -254,18 +263,25 @@ namespace WindowsFormsApp1
 
         }
 
+        private void timer3_Tick(object sender, EventArgs e)
+        {
+            SpawnEnemy();
+        }
+
+        private void button_start_Click(object sender, EventArgs e)
+        {
+            Init();
+            button_start.Visible = false;
+            button_start.Enabled = false;
+        }
+
         private void SpawnEnemy()
         {
             Enemy e = new Enemy();
-            int wert = 20;
-            int time = rnd.Next(0, 500);
-            if(time < wert)
-            {
-                wert+=2;
-                enemys.Add(e);
-                panel1.Controls.Add(e.p);
-            }
-            
+            enemys.Add(e);
+            panel1.Controls.Add(e.p);
+
+
         }
 
 
