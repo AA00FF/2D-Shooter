@@ -30,6 +30,7 @@ namespace WindowsFormsApp1
             if (direction == 0 && p.Location.X != 0)
             {
                 p.Location = new Point(p.Location.X - 100, p.Location.Y);
+                
                 //wenn position von p.Location == von Player dann bekommt player dmg und enemy wird deleted
 
             }

@@ -78,13 +78,11 @@ namespace WindowsFormsApp1
                     break;
 
                 case Keys.Space:
-                    SpawnEnemy();
-                    break;
-                case Keys.X:
                     Bullet b = new Bullet(pictureBox_player.Location.X, pictureBox_player.Location.Y, true);
                     bullet.Add(b);
                     panel1.Controls.Add(b.p);
                     break;
+
             }
         }
 
@@ -139,9 +137,24 @@ namespace WindowsFormsApp1
                     }
                 }
                 enemys[i].EnemyMove();
+                if (enemys[i].p.Location.X == pictureBox_player.Location.X && enemys[i].p.Location.Y == pictureBox_player.Location.Y)
+                {
+                    GameEnd();
+                }
             }
         }
-
+        private void GameEnd()
+        {
+            panel1.Controls.Clear();
+            timer1.Stop();
+            timer2.Stop();
+            timer3.Stop();
+            PictureBox over = new PictureBox();
+            over.ImageLocation = AppDomain.CurrentDomain.BaseDirectory + "gameover.png";
+            over.Location = new Point(450, 200);
+            over.SizeMode = PictureBoxSizeMode.AutoSize;
+            panel1.Controls.Add(over);
+        }
         private void DeleteEnemy()
         {
             List<Enemy> removeenemy = new List<Enemy>();
@@ -182,8 +195,7 @@ namespace WindowsFormsApp1
                         }
                         if (pictureBox_player.Location.X == b.p.Location.X && pictureBox_player.Location.Y == b.p.Location.Y && b.Player == false)
                         {
-                            removeb.Add(b);
-
+                            GameEnd();
                         }
                     }
 
@@ -273,6 +285,11 @@ namespace WindowsFormsApp1
             Init();
             button_start.Visible = false;
             button_start.Enabled = false;
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
         }
 
         private void SpawnEnemy()
