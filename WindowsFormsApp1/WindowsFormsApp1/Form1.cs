@@ -333,6 +333,8 @@ namespace WindowsFormsApp1
         {
             button_restart.Visible = false;
             button_restart.Enabled = false;
+            pause = false;
+            label6.Visible = false;
             Init();
 
         }
