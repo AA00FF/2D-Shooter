@@ -52,21 +52,54 @@ namespace WindowsFormsApp1
                     case Keys.Up:
                         if (sp.p.Location.Y != 0)
                             sp.MoveUp();
+                        foreach (Enemy a in enemys)
+                        {
+                            if (a.p.Location.X == sp.p.Location.X && a.p.Location.Y == sp.p.Location.Y)
+                            {
+                                GameEnd();
+                                return;
+                            }
+                        }
+                        
                         break;
 
                     case Keys.Down:
                         if (sp.p.Location.Y != 400)
                             sp.MoveDown();
+                        foreach (Enemy a in enemys)
+                        {
+                            if (a.p.Location.X == sp.p.Location.X && a.p.Location.Y == sp.p.Location.Y)
+                            {
+                                GameEnd();
+                                return;
+                            }
+                        }
                         break;
 
                     case Keys.Right:
                         if (sp.p.Location.X != 900)
                             sp.MoveRight();
+                        foreach (Enemy a in enemys)
+                        {
+                            if (a.p.Location.X == sp.p.Location.X && a.p.Location.Y == sp.p.Location.Y)
+                            {
+                                GameEnd();
+                                return;
+                            }
+                        }
                         break;
 
                     case Keys.Left:
                         if (sp.p.Location.X != 0)
                             sp.MoveLeft();
+                        foreach (Enemy a in enemys)
+                        {
+                            if (a.p.Location.X == sp.p.Location.X && a.p.Location.Y == sp.p.Location.Y)
+                            {
+                                GameEnd();
+                                return;
+                            }
+                        }
                         break;
 
                     case Keys.X:
@@ -136,10 +169,16 @@ namespace WindowsFormsApp1
                         DeleteEnemy();
                     }
                 }
+                if (enemys[i].p.Location.X == sp.p.Location.X && enemys[i].p.Location.Y == sp.p.Location.Y)
+                {
+                    GameEnd();
+                    return;
+                }
                 enemys[i].EnemyMove();
                 if (enemys[i].p.Location.X == sp.p.Location.X && enemys[i].p.Location.Y == sp.p.Location.Y)
                 {
                     GameEnd();
+                    return;
                 }
             }
         }
