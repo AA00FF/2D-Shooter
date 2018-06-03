@@ -46,6 +46,7 @@ namespace WindowsFormsApp1
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
+            if(!dieded)
             switch (e.KeyCode)
             {
                 case Keys.Up:
@@ -85,6 +86,9 @@ namespace WindowsFormsApp1
             pictureBox_player.SizeMode = PictureBoxSizeMode.AutoSize;
             panel1.Controls.Add(pictureBox_player);
             SpawnEnemy();
+            dieded = false;
+            label1.Text = "Points: 0";
+            Punkte = 0;
             timer1.Start();
             timer2.Start();
             timer3.Start();
@@ -99,8 +103,9 @@ namespace WindowsFormsApp1
         private void Form1_Load(object sender, EventArgs e)
         {
             label1.Text = "Points: 0";
-
+            dieded = false;
         }
+        private bool dieded;
         private void eshoot()
         {
             int z;
@@ -196,6 +201,7 @@ namespace WindowsFormsApp1
                                 }
                                 if (pictureBox_player.Location.X == b.p.Location.X && pictureBox_player.Location.Y == b.p.Location.Y && b.Player == false)
                                 {
+                                    dieded = true;
                                     GameEnd();
                                 }
                             }
@@ -210,7 +216,7 @@ namespace WindowsFormsApp1
             {
 
             }
-           
+
 
             foreach (Enemy e in removeenemy)
             {
@@ -223,6 +229,7 @@ namespace WindowsFormsApp1
                 panel1.Controls.Remove(a.p);
             }
         }
+
         private void DeleteBullet()
         {
 
@@ -250,7 +257,7 @@ namespace WindowsFormsApp1
         private void pictureBox_player_Click(object sender, EventArgs e)
         {
             //pictureBox_player.ImageLocation = AppDomain.CurrentDomain.BaseDirectory + "pepe.jpg";
-            // vllt ein secret char
+            //vllt ein secret char
         }
 
         private void Timer2_Tick(object sender, EventArgs e)
