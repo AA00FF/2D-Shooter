@@ -12,6 +12,7 @@ namespace WindowsFormsApp1
 {
     public partial class Form1 : Form
     {
+        bool pause = false;
         List<Enemy> enemys = new List<Enemy>();
         List<Bullet> bullet = new List<Bullet>();
         int x = 0, y = 0;
@@ -46,36 +47,54 @@ namespace WindowsFormsApp1
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
-            if(!dieded)
-            switch (e.KeyCode)
+            if(e.KeyCode == Keys.Escape)
             {
-                case Keys.Up:
-                    if (pictureBox_player.Location.Y != 0)
-                        MoveUp();
-                    break;
-
-                case Keys.Down:
-                    if (pictureBox_player.Location.Y != 400)
-                        MoveDown();
-                    break;
-
-                case Keys.Right:
-                    if (pictureBox_player.Location.X != 900)
-                        MoveRight();
-                    break;
-
-                case Keys.Left:
-                    if (pictureBox_player.Location.X != 0)
-                        MoveLeft();
-                    break;
-
-                case Keys.X:
-                    Bullet b = new Bullet(pictureBox_player.Location.X, pictureBox_player.Location.Y, true);
-                    bullet.Add(b);
-                    panel1.Controls.Add(b.p);
-                    break;
-
+                if (!pause)
+                {
+                    timer1.Stop();
+                    timer2.Stop();
+                    timer3.Stop();
+                    pause = !pause;
+                    label6.Visible = true;
+                }
+                else
+                {
+                    timer1.Start();
+                    timer2.Start();
+                    timer3.Start();
+                    pause = !pause;
+                    label6.Visible = false;
+                }
             }
+            if (!dieded && !pause)
+                switch (e.KeyCode)
+                {
+                    case Keys.Up:
+                        if (pictureBox_player.Location.Y != 0)
+                            MoveUp();
+                        break;
+
+                    case Keys.Down:
+                        if (pictureBox_player.Location.Y != 400)
+                            MoveDown();
+                        break;
+
+                    case Keys.Right:
+                        if (pictureBox_player.Location.X != 900)
+                            MoveRight();
+                        break;
+
+                    case Keys.Left:
+                        if (pictureBox_player.Location.X != 0)
+                            MoveLeft();
+                        break;
+
+                    case Keys.X:
+                        Bullet b = new Bullet(pictureBox_player.Location.X, pictureBox_player.Location.Y, true);
+                        bullet.Add(b);
+                        panel1.Controls.Add(b.p);
+                        break;
+                }
         }
 
         public void Init()
@@ -102,8 +121,10 @@ namespace WindowsFormsApp1
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            label6.Visible = false;
             label1.Text = "Points: 0";
             dieded = false;
+            timer4.Start();
         }
         private bool dieded;
         private void eshoot()
@@ -314,6 +335,11 @@ namespace WindowsFormsApp1
             button_restart.Enabled = false;
             Init();
 
+        }
+
+        private void timer4_Tick(object sender, EventArgs e)
+        {
+            label2.Text = DateTime.Now.ToString();
         }
 
         private void SpawnEnemy()
