@@ -15,7 +15,6 @@ namespace WindowsFormsApp1
         List<Enemy> enemys = new List<Enemy>();
         List<Bullet> bullet = new List<Bullet>();
         int x = 0, y = 0;
-        public int[,] position_player { get; private set; } = new int[10, 5];
 
         public Form1()
         {
@@ -23,34 +22,26 @@ namespace WindowsFormsApp1
         }
         private void MoveUp()
         {
-            position_player[x, y] = 0;
             pictureBox_player.Location = new Point(pictureBox_player.Location.X, pictureBox_player.Location.Y - 100);
             y = pictureBox_player.Location.Y / 100;
-            position_player[x, y] = 1;
         }
 
         private void MoveDown()
         {
-            position_player[x, y] = 0;
             pictureBox_player.Location = new Point(pictureBox_player.Location.X, pictureBox_player.Location.Y + 100);
             y = pictureBox_player.Location.Y / 100;
-            position_player[x, y] = 1;
         }
 
         private void MoveRight()
         {
-            position_player[x, y] = 0;
             pictureBox_player.Location = new Point(pictureBox_player.Location.X + 100, pictureBox_player.Location.Y);
             x = pictureBox_player.Location.X / 100;
-            position_player[x, y] = 1;
         }
 
         private void MoveLeft()
         {
-            position_player[x, y] = 0;
             pictureBox_player.Location = new Point(pictureBox_player.Location.X - 100, pictureBox_player.Location.Y);
             x = pictureBox_player.Location.X / 100;
-            position_player[x, y] = 1;
         }
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
@@ -77,7 +68,7 @@ namespace WindowsFormsApp1
                         MoveLeft();
                     break;
 
-                case Keys.Space:
+                case Keys.X:
                     Bullet b = new Bullet(pictureBox_player.Location.X, pictureBox_player.Location.Y, true);
                     bullet.Add(b);
                     panel1.Controls.Add(b.p);
@@ -88,9 +79,11 @@ namespace WindowsFormsApp1
 
         public void Init()
         {
+            panel1.Controls.Clear();
             pictureBox_player.ImageLocation = AppDomain.CurrentDomain.BaseDirectory + "Spaceship.png";
             pictureBox_player.Location = new Point(0, 0);
-            position_player[0, 0] = 1;
+            pictureBox_player.SizeMode = PictureBoxSizeMode.AutoSize;
+            panel1.Controls.Add(pictureBox_player);
             SpawnEnemy();
             timer1.Start();
             timer2.Start();
@@ -154,6 +147,10 @@ namespace WindowsFormsApp1
             over.Location = new Point(450, 200);
             over.SizeMode = PictureBoxSizeMode.AutoSize;
             panel1.Controls.Add(over);
+            button_restart.Visible = true;
+            button_restart.Enabled = true;
+            bullet.Clear();
+            enemys.Clear();
         }
         private void DeleteEnemy()
         {
@@ -180,28 +177,40 @@ namespace WindowsFormsApp1
         {
             List<Enemy> removeenemy = new List<Enemy>();
             List<Bullet> removeb = new List<Bullet>();
-            foreach (Enemy e in enemys)
+            try
             {
-                if (e.p.Location != null)
+                foreach (Enemy e in enemys)
                 {
-                    foreach (Bullet b in bullet)
+                    if (e.p.Location != null)
                     {
-                        if (e.p.Location.X == b.p.Location.X && e.p.Location.Y == b.p.Location.Y && b.Player == true)
+                        foreach (Bullet b in bullet)
                         {
-                            Punkte = Punkte + 100;
-                            removeb.Add(b);
-                            removeenemy.Add(e);
-                            label1.Text = "Points: " + Punkte.ToString();
+                            if (pictureBox_player != null)
+                            {
+                                if (e.p.Location.X == b.p.Location.X && e.p.Location.Y == b.p.Location.Y && b.Player == true)
+                                {
+                                    Punkte = Punkte + 100;
+                                    removeb.Add(b);
+                                    removeenemy.Add(e);
+                                    label1.Text = "Points: " + Punkte.ToString();
+                                }
+                                if (pictureBox_player.Location.X == b.p.Location.X && pictureBox_player.Location.Y == b.p.Location.Y && b.Player == false)
+                                {
+                                    GameEnd();
+                                }
+                            }
                         }
-                        if (pictureBox_player.Location.X == b.p.Location.X && pictureBox_player.Location.Y == b.p.Location.Y && b.Player == false)
-                        {
-                            GameEnd();
-                        }
+
+
                     }
 
                 }
+            }
+            catch (Exception)
+            {
 
             }
+           
 
             foreach (Enemy e in removeenemy)
             {
@@ -289,6 +298,14 @@ namespace WindowsFormsApp1
 
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
+
+        }
+
+        private void button_restart_Click(object sender, EventArgs e)
+        {
+            button_restart.Visible = false;
+            button_restart.Enabled = false;
+            Init();
 
         }
 
