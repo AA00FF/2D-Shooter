@@ -16,34 +16,14 @@ namespace WindowsFormsApp1
         List<Enemy> enemys = new List<Enemy>();
         List<Bullet> bullet = new List<Bullet>();
         int x = 0, y = 0;
+        Player sp = new Player(0, 0);
+        
 
         public Form1()
         {
             InitializeComponent();
         }
-        private void MoveUp()
-        {
-            pictureBox_player.Location = new Point(pictureBox_player.Location.X, pictureBox_player.Location.Y - 100);
-            y = pictureBox_player.Location.Y / 100;
-        }
-
-        private void MoveDown()
-        {
-            pictureBox_player.Location = new Point(pictureBox_player.Location.X, pictureBox_player.Location.Y + 100);
-            y = pictureBox_player.Location.Y / 100;
-        }
-
-        private void MoveRight()
-        {
-            pictureBox_player.Location = new Point(pictureBox_player.Location.X + 100, pictureBox_player.Location.Y);
-            x = pictureBox_player.Location.X / 100;
-        }
-
-        private void MoveLeft()
-        {
-            pictureBox_player.Location = new Point(pictureBox_player.Location.X - 100, pictureBox_player.Location.Y);
-            x = pictureBox_player.Location.X / 100;
-        }
+        
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
@@ -70,27 +50,27 @@ namespace WindowsFormsApp1
                 switch (e.KeyCode)
                 {
                     case Keys.Up:
-                        if (pictureBox_player.Location.Y != 0)
-                            MoveUp();
+                        if (sp.p.Location.Y != 0)
+                            sp.MoveUp();
                         break;
 
                     case Keys.Down:
-                        if (pictureBox_player.Location.Y != 400)
-                            MoveDown();
+                        if (sp.p.Location.Y != 400)
+                            sp.MoveDown();
                         break;
 
                     case Keys.Right:
-                        if (pictureBox_player.Location.X != 900)
-                            MoveRight();
+                        if (sp.p.Location.X != 900)
+                            sp.MoveRight();
                         break;
 
                     case Keys.Left:
-                        if (pictureBox_player.Location.X != 0)
-                            MoveLeft();
+                        if (sp.p.Location.X != 0)
+                            sp.MoveLeft();
                         break;
 
                     case Keys.X:
-                        Bullet b = new Bullet(pictureBox_player.Location.X, pictureBox_player.Location.Y, true);
+                        Bullet b = new Bullet(sp.p.Location.X, sp.p.Location.Y, true);
                         bullet.Add(b);
                         panel1.Controls.Add(b.p);
                         break;
@@ -100,10 +80,11 @@ namespace WindowsFormsApp1
         public void Init()
         {
             panel1.Controls.Clear();
-            pictureBox_player.ImageLocation = AppDomain.CurrentDomain.BaseDirectory + "Spaceship.png";
-            pictureBox_player.Location = new Point(0, 0);
-            pictureBox_player.SizeMode = PictureBoxSizeMode.AutoSize;
-            panel1.Controls.Add(pictureBox_player);
+            sp.p = pictureBox_player;
+            sp.p.ImageLocation = AppDomain.CurrentDomain.BaseDirectory + "Spaceship.png";
+            sp.p.Location = new Point(0, 0);
+            sp.p.SizeMode = PictureBoxSizeMode.AutoSize;
+            panel1.Controls.Add(sp.p);
             SpawnEnemy();
             dieded = false;
             label1.Text = "Points: 0";
@@ -156,7 +137,7 @@ namespace WindowsFormsApp1
                     }
                 }
                 enemys[i].EnemyMove();
-                if (enemys[i].p.Location.X == pictureBox_player.Location.X && enemys[i].p.Location.Y == pictureBox_player.Location.Y)
+                if (enemys[i].p.Location.X == sp.p.Location.X && enemys[i].p.Location.Y == sp.p.Location.Y)
                 {
                     GameEnd();
                 }
@@ -220,7 +201,7 @@ namespace WindowsFormsApp1
                                     removeenemy.Add(e);
                                     label1.Text = "Points: " + Punkte.ToString();
                                 }
-                                if (pictureBox_player.Location.X == b.p.Location.X && pictureBox_player.Location.Y == b.p.Location.Y && b.Player == false)
+                                if (sp.p.Location.X == b.p.Location.X && sp.p.Location.Y == b.p.Location.Y && b.Player == false)
                                 {
                                     dieded = true;
                                     GameEnd();
